@@ -53,8 +53,7 @@ The pretrained model file is larger than GitHub's 100 MB upload limit and is the
 Download the model file:
 
 **Google Drive:**
-https://drive.google.com/drive/folders/1xdCBF_WPKQMCaGFCaZYu83UgVfKJOO1n
-
+https://drive.google.com/drive/folders/1pRxO1bRNNOr9dXV2mTdaF6h0eLd5tuy0?usp=sharing
 Download:
 
 ```text

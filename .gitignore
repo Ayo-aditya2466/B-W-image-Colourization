@@ -1,0 +1,4 @@
+myenv/
+venv/
+__pycache__/
+*.pycmodel/colorization_release_v2.caffemodel 

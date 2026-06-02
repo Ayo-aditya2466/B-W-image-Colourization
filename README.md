@@ -1,39 +1,23 @@
 # Black & White Image Colorization
 
-## Project Overview
-
-This project automatically converts black-and-white (grayscale) images into realistic color images using Deep Learning techniques. The implementation utilizes OpenCV's DNN module along with a pre-trained Caffe colorization model to predict color information for grayscale images.
-
-The model has been trained on a large dataset of color images and can generate visually appealing colorized outputs for historical photographs and grayscale images.
-
----
+A Python-based desktop application that colorizes black-and-white images using OpenCV's Deep Neural Network (DNN) colorization model and a Tkinter graphical user interface.
 
 ## Features
 
-- Automatic grayscale image colorization
-- Deep Learning-based color prediction
-- Uses pre-trained Caffe colorization model
-- Supports multiple image formats
-- Simple and efficient implementation
-- High-quality colorized outputs
-
----
-
-## Technologies Used
-
-- Python
-- OpenCV
-- NumPy
-- Pillow (PIL)
-- Deep Neural Networks (DNN)
-- Caffe Model
-
----
+* Upload black-and-white images
+* Automatic image colorization using a pretrained deep learning model
+* Side-by-side comparison of original and colorized images
+* Save the colorized output
+* Simple and user-friendly Tkinter GUI
 
 ## Project Structure
 
-```
-B-W-image-Colourization/
+```text
+colourize/
+│
+├── colorize.py
+├── README.md
+├── .gitignore
 │
 ├── images/
 │   ├── building.jpg
@@ -42,94 +26,100 @@ B-W-image-Colourization/
 │   ├── rose.jpg
 │   └── tiger.jpg
 │
-├── model/
-│   ├── colorization_deploy_v2.prototxt
-│   ├── colorization_release_v2.caffemodel
-│   └── pts_in_hull.npy
-│
-├── colorize.py
-├── README.md
-└── .gitignore
+└── model/
+    ├── colorization_deploy_v2.prototxt
+    ├── pts_in_hull.npy
+    └── readme.md
 ```
 
----
+## Requirements
 
-## Installation
+* Python 3.x
+* OpenCV
+* NumPy
+* Pillow
+* Tkinter
 
-### Clone the Repository
+Install dependencies:
 
 ```bash
-git clone https://github.com/Ayo-aditya2466/B-W-image-Colourization.git
+pip install numpy opencv-python pillow
 ```
 
-### Navigate to Project Directory
+## Download Model File
 
-```bash
-cd B-W-image-Colourization
+The pretrained model file is larger than GitHub's 100 MB upload limit and is therefore not included in this repository.
+
+Download the model file:
+
+**Google Drive:**
+https://drive.google.com/drive/folders/1xdCBF_WPKQMCaGFCaZYu83UgVfKJOO1n
+
+Download:
+
+```text
+colorization_release_v2.caffemodel
 ```
 
-### Install Required Libraries
+Place the downloaded file inside:
 
-```bash
-pip install opencv-python numpy pillow
+```text
+model/
 ```
 
----
+Final model folder:
 
-## Required Model Files
-
-The project uses the following pre-trained Caffe model files:
-
-- `colorization_deploy_v2.prototxt`
-- `colorization_release_v2.caffemodel`
-- `pts_in_hull.npy`
-
-These files are stored in the `model` directory and are required for the colorization process.
-
----
+```text
+model/
+├── colorization_deploy_v2.prototxt
+├── pts_in_hull.npy
+├── colorization_release_v2.caffemodel
+└── readme.md
+```
 
 ## Running the Project
+
+Navigate to the project directory:
+
+```bash
+cd colourize
+```
+
+Run:
 
 ```bash
 python colorize.py
 ```
 
----
+You should see:
 
-## Working Methodology
+```text
+Loading Model...
+Model Loaded Successfully!
+```
 
-1. Load the grayscale image.
-2. Load the pre-trained Caffe colorization model.
-3. Extract luminance information from the image.
-4. Pass image data through the Deep Neural Network.
-5. Predict color channels.
-6. Combine luminance and predicted color information.
-7. Generate the final colorized image.
+The GUI window will open automatically.
 
----
+## How to Use
 
-## Applications
+1. Click **Upload Image**
+2. Select a black-and-white image
+3. Wait for the model to process the image
+4. View the colorized result
+5. Click **Save Colorized Image** to save the output
 
-- Restoration of historical photographs
-- Image enhancement
-- Digital media processing
-- Computer vision research
-- AI-assisted photo editing
+## Technologies Used
 
----
-
-## Future Enhancements
-
-- Real-time image colorization
-- Batch image processing
-- Web-based user interface
-- Support for video colorization
-- Higher-resolution output generation
-
----
+* Python
+* OpenCV DNN
+* NumPy
+* Tkinter
+* Pillow
 
 ## Author
 
-Aditya Mhetre
+Aditya
 
-GitHub: https://github.com/Ayo-aditya2466
+## License
+
+This project is created for educational and learning purposes.

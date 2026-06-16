@@ -258,7 +258,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Primary CTA + status under hero
-cta1, cta2, cta3 = st.columns([1, 4])
+cta1, cta2, cta3 = st.columns([1, 4, 1])
 
 with cta2:
     st.markdown('<div style="padding-top:0.55rem;"><span class="status-pill">'

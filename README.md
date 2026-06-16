@@ -1,124 +1,168 @@
-# Black & White Image Colorization
+# ColorizeAI Studio
 
-A Python-based desktop application that colorizes black-and-white images using OpenCV's Deep Neural Network (DNN) colorization model and a Tkinter graphical user interface.
+![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-DNN-5C3EE8?logo=opencv&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-Deployed-FF4B4B?logo=streamlit&logoColor=white)
+![Model](https://img.shields.io/badge/Model-Zhang%20et%20al.%202016-blueviolet)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+> **Bring black-and-white photos back to life using deep learning.**
+> ColorizeAI Studio colorizes images in under 0.5 seconds using a CNN
+> trained on 1.3 million ImageNet images — with batch processing,
+> face detection, enhancement controls, and live analytics.
+
+## Live Demo
+👉 **[colorizeai-studio.streamlit.app](https://your-app.streamlit.app)**
+
+---
 
 ## Features
 
-* Upload black-and-white images
-* Automatic image colorization using a pretrained deep learning model
-* Side-by-side comparison of original and colorized images
-* Save the colorized output
-* Simple and user-friendly Tkinter GUI
+| Feature | Description |
+|---------|-------------|
+| **AI Colorization** | Zhang et al. 2016 CNN via OpenCV DNN in LAB color space |
+| **Comparison Slider** | Drag to reveal before/after side by side |
+| **Face Detection** | Haar Cascade detects and crops faces in colorized output |
+| **Enhancement Controls** | Adjust brightness, contrast, saturation, sharpness post-colorization |
+| **Batch Processing** | Colorize multiple images at once, download as ZIP |
+| **Analytics Dashboard** | Session history, score trends, processing time charts |
+| **Sample Gallery** | Try 5 built-in test images instantly — no upload needed |
+| **Auto B&W Converter** | Upload a colour photo — app converts it before colorizing |
+
+---
+
+## How It Works
+
+```
+Input (B&W image)
+      ↓
+Convert to CIELAB color space
+      ↓
+Extract L (luminance) channel
+      ↓
+Resize L to 224×224 (model input)
+      ↓
+CNN predicts 313 ab color bins (Zhang et al. 2016)
+      ↓
+Resize ab output back to original resolution
+      ↓
+Recombine L + predicted ab → convert to RGB
+      ↓
+Output (colorized image)
+```
+
+---
+
+## Model
+
+| Attribute | Detail |
+|-----------|--------|
+| Architecture | 16-layer CNN (VGG-style encoder-decoder) |
+| Paper | Zhang et al., "Colorful Image Colorization", ECCV 2016 |
+| Training data | 1.3M ImageNet images |
+| Color space | CIELAB |
+| Output | 313 ab color class bins |
+| Inference engine | OpenCV DNN module |
+| Runtime | ~0.15–0.5s per image (CPU) |
+
+> This project uses the pretrained Zhang et al. 2016 model.
+> The neural network architecture and weights were created by
+> Richard Zhang, Phillip Isola, and Alexei A. Efros at UC Berkeley.
+> My contribution is the full application layer: pipeline, GUI,
+> batch processing, face detection, analytics, and deployment.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Language | Python 3.10 |
+| CV / DNN | OpenCV 4.9 |
+| Arrays | NumPy 1.26 |
+| Image processing | Pillow 10 |
+| Web app | Streamlit 1.45 |
+| Charts | Altair |
+| Comparison slider | streamlit-image-comparison |
+| Face detection | OpenCV Haar Cascade |
+
+---
 
 ## Project Structure
 
-```text
-colourize/
-│
-├── colorize.py
-├── README.md
+```
+colorizeai-studio/
+├── app.py                  ← Streamlit web application
+├── colorize.py             ← Desktop Tkinter application (local)
+├── model/
+│   ├── colorization_deploy_v2.prototxt
+│   ├── pts_in_hull.npy
+│   └── colorization_release_v2.caffemodel  ← NOT in repo (see setup)
+├── images/                 ← 5 sample test images
+├── .streamlit/
+│   └── config.toml
+├── requirements.txt
+├── packages.txt
 ├── .gitignore
-│
-├── images/
-│   ├── building.jpg
-│   ├── einstein.jpg
-│   ├── nature.jpg
-│   ├── rose.jpg
-│   └── tiger.jpg
-│
-└── model/
-    ├── colorization_deploy_v2.prototxt
-    ├── pts_in_hull.npy
-    └── readme.md
+└── README.md
 ```
 
-## Requirements
+---
 
-* Python 3.x
-* OpenCV
-* NumPy
-* Pillow
-* Tkinter
-
-Install dependencies:
+## Local Setup
 
 ```bash
-pip install numpy opencv-python pillow
-```
+# 1. Clone
+git clone https://github.com/Ayo-aditya2466/colorizeai-studio.git
+cd colorizeai-studio
 
-## Download Model File
+# 2. Install
+pip install -r requirements.txt
 
-The pretrained model file is larger than GitHub's 100 MB upload limit and is therefore not included in this repository.
+# 3. Add model file to model/ folder (see README for download link)
 
-Download the model file:
+# 4. Run web app
+streamlit run app.py
 
-**Google Drive:**
-https://drive.google.com/drive/folders/1pRxO1bRNNOr9dXV2mTdaF6h0eLd5tuy0?usp=sharing
-Download:
-
-```text
-colorization_release_v2.caffemodel
-```
-
-Place the downloaded file inside:
-
-```text
-model/
-```
-
-Final model folder:
-
-```text
-model/
-├── colorization_deploy_v2.prototxt
-├── pts_in_hull.npy
-├── colorization_release_v2.caffemodel
-└── readme.md
-```
-
-## Running the Project
-
-Navigate to the project directory:
-
-```bash
-cd colourize
-```
-
-Run:
-
-```bash
+# 5. Or run desktop app
 python colorize.py
 ```
 
-You should see:
+---
 
-```text
-Loading Model...
-Model Loaded Successfully!
-```
+## Skills Demonstrated
 
-The GUI window will open automatically.
+**Computer Vision** — LAB color space pipeline, DNN inference,
+image preprocessing/postprocessing, face detection, colorfulness metric
 
-## How to Use
+**Deep Learning** — Pretrained CNN inference, Zhang et al. 2016
+architecture (313-class ab classification, class rebalancing)
 
-1. Click **Upload Image**
-2. Select a black-and-white image
-3. Wait for the model to process the image
-4. View the colorized result
-5. Click **Save Colorized Image** to save the output
+**Python Engineering** — Session state, threading, file I/O,
+ZIP generation, image format conversion, caching
 
-## Technologies Used
+**Web Application** — Streamlit multipage app, custom CSS design
+system, cloud deployment
 
-* Python
-* OpenCV DNN
-* NumPy
-* Tkinter
-* Pillow
+---
 
 ## Author
 
-Aditya
+**Aditya Mhetre**
+
+- GitHub: [Ayo-aditya2466](https://github.com/Ayo-aditya2466)
+- LinkedIn: [Add your LinkedIn URL]
+
+---
 
 ## License
 
-This project is created for educational and learning purposes.
+MIT License — free to fork, adapt, and build on.
+
+---
+
+## Reference
+
+Zhang, R., Isola, P., & Efros, A. A. (2016).
+*Colorful Image Colorization.* ECCV 2016.
+[Paper](https://arxiv.org/abs/1603.08511)

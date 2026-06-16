@@ -20,7 +20,23 @@ try:
     HAS_SLIDER = True
 except ImportError:
     HAS_SLIDER = False
+import gdown
 
+DIR   = os.path.dirname(os.path.abspath(__file__))
+MODEL = os.path.join(DIR, "model", "colorization_release_v2.caffemodel")
+
+def ensure_model():
+    """Download caffemodel from Google Drive on first run (Streamlit Cloud)."""
+    if not os.path.exists(MODEL):
+        os.makedirs(os.path.join(DIR, "model"), exist_ok=True)
+        with st.spinner("Downloading model (first run only, ~140MB)..."):
+            gdown.download(
+                "https://drive.google.com/file/d/1isy5zFjFx0IYLrc1bFm97RFyXGYtoKm-/view?usp=sharing",
+                MODEL,
+                quiet=False
+            )
+
+ensure_model()
 st.set_page_config(page_title="ColorizeAI Studio", layout="wide",
                    initial_sidebar_state="collapsed")
 

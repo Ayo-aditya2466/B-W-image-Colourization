@@ -151,7 +151,7 @@ system, cloud deployment
 **Aditya Mhetre**
 
 - GitHub: [Ayo-aditya2466](https://github.com/Ayo-aditya2466)
-- LinkedIn: [Add your LinkedIn URL]
+- LinkedIn: [[Add your LinkedIn URL](https://www.linkedin.com/in/adityamhetre24/)]
 
 ---
 
